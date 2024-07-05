@@ -1,7 +1,7 @@
 # mini-rpc
 一个rpc框架，支持多种功能，并可灵活扩展
 
-本项目参考：
+### 本项目参考：
 
 1.guide哥的rpc框架（https://github.com/Snailclimb/guide-rpc-framework）
 
@@ -10,7 +10,8 @@
 3.马哥的Retryer框架（https://github.com/houbb/sisyphus）
 
 
-并在他们的基础上添加了额外的功能：
+
+### 在他们的基础上扩展了额外的功能：
 
 1.由于mini-spring不支持扫描指定注解，因此修改了注册rpcService到ioc、zk的时机
 
