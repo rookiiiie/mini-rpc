@@ -1,0 +1,2 @@
+uuid=github.javaguide.requestIdGenerate.requestIdGenerateStrategy.UUID
+snowflake=github.javaguide.requestIdGenerate.requestIdGenerateStrategy.Snowflake
