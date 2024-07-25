@@ -15,7 +15,7 @@
 
 1.由于mini-spring不支持扫描指定注解，因此修改了注册rpcService到ioc、zk的时机
 
-2.通过SPI配置生成请求ID的方式，除了原有的UUID外，增加了改良版SeataSnowflake方式
+2.通过SPI配置生成请求ID的方式，除了原有的UUID外，增加了改良版SeataSnowflake方式（改进有点可见Seata官网）
 
 3.增加了多种容错策略（failover、failfast），通过@Reference注解指定，并可以灵活扩展
 
