@@ -140,6 +140,11 @@ invokeBeanFactoryPostProcessors(beanFactory);
 
 由于Seata-Snowflake在生成ID的过程不依赖时间，因此不存在时间回拨问题，同时也不存在生成不稳定问题，很好的解决了上述两个问题。
 
+当使用了Seata-Snowflake后，消息协议的requestID字段则需要占8Byte(64bit)，rpc消息结构如下：
+
+![X@`AV2(4NMJ7072EG@5WZPW](https://github.com/user-attachments/assets/36a6eb88-299a-4bd7-9776-5f599acd17be)
+
+
 #### 优化3:
 当客户端rpc服务调用rpc服务时，由于网络或一些原因导致该rpc服务不可用，为了应对这种情况，本项目在客户端提供了**单个服务级别**的容错服务，支持**failover（故障转移）、failfast（快速失败）策略**。可在@RpcReference引用中配置，如下：
 
