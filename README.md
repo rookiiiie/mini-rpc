@@ -7,7 +7,7 @@
 
 2.[DerekYRC佬的mini-spring框架](https://github.com/DerekYRC/mini-spring)
 
-3.[马哥的Retryer框架]([https://github.com/DerekYRC/mini-spring](https://github.com/houbb/sisyphus))
+3.[马哥的Retryer框架](https://github.com/houbb/sisyphus)
 
   
 
