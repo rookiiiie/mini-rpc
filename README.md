@@ -107,15 +107,14 @@ invokeBeanFactoryPostProcessors(beanFactory);
 	}
 ```
 本项目的第一个扩展点执行@RpcService服务的注册，位于如下路径
-![Alt text](image.png)
+![image](https://github.com/user-attachments/assets/e2255fe6-6167-4e1e-a127-8946af86dbcc)
 第二个扩展点执行@Reference字段的代理对象注入，位于如下路径
-![Alt text](image-1.png)
-
+![image-1](https://github.com/user-attachments/assets/84bb3d9c-92aa-4a90-88d9-6b7889299f22)
 ##### 优化2:
 原本的guide-rpc中使用了UUID作为请求体ID，由于UUID其**空间消耗大(128bit)、不安全(基于MAC生成、非递增)**等缺点，本项目增加了改良版Seata-Snowflake算法，用于生成分布式全局唯一的请求ID，可通过SPI的方式来灵活配置。
 
 该算法代码路径如下：
-![Alt text](image-2.png)
+![image-2](https://github.com/user-attachments/assets/384d6e34-6d5f-44e0-bb36-40e7a486ae33)
 
  ###### 原版Snowflake的结构如下：
  > 64bit(1b sign + timestamp 41b  + 10b workerId + 12b sequence)
@@ -139,17 +138,16 @@ invokeBeanFactoryPostProcessors(beanFactory);
 ##### 优化3:
 当客户端rpc服务调用rpc服务时，由于网络或一些原因导致该rpc服务不可用，为了应对这种情况，本项目在客户端提供了**单个服务级别**的容错服务，支持**failover（故障转移）、failfast（快速失败）策略**。可在@RpcReference引用中配置，如下：
 
-![Alt text](image-4.png)
+![image-4](https://github.com/user-attachments/assets/5acbbe5b-5dcc-478e-9abb-177b27c8808b)
 
 当然，也可以通过实现如下TolerantStrategy接口的doTolerant方法自定义你想要的容错逻辑。
-![Alt text](image-3.png)
+![image-3](https://github.com/user-attachments/assets/1a14c09c-dfed-46c8-8470-13bf26d7b6a2)
 
 ##### 优化4:
 整合sisyphus-Retryer框架，支持多种超时重试策略（如固定间隔、指数增加间隔等），可在@RpcReference引用中配置，如下：
-![Alt text](image-6.png)
+![image-6](https://github.com/user-attachments/assets/c11d88da-fa23-4878-9c27-497f7c1341f5)
 
 当然，你也可以像固定间隔时间一样，通过继承com.github.houbb.sisyphus.core.support.wait.AbstractRetryWait或实现RetryWait接口来灵活定义自己想要的重试策略~
-![Alt text](image-7.png)
 
 为什么不使用常用的spring-Retry、guava-Retry框架？
 
