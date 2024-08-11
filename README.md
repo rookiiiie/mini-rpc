@@ -28,7 +28,7 @@
 
 ### 接下来逐步介绍上述优化的代码以及原因
 
-##### 优化1:
+#### 优化1:
  ***1.1*** 由于mini-spring不支持扫描指定注解到IOC，为了支持这个功能，本项目修改了package org.springframework.context.annotation包下的
  ``` 
 	public Set<BeanDefinition> findCandidateComponents(String basePackage,Class T) {
@@ -107,10 +107,14 @@ invokeBeanFactoryPostProcessors(beanFactory);
 	}
 ```
 本项目的第一个扩展点执行@RpcService服务的注册，位于如下路径
+
 ![image](https://github.com/user-attachments/assets/e2255fe6-6167-4e1e-a127-8946af86dbcc)
+
 第二个扩展点执行@Reference字段的代理对象注入，位于如下路径
+
 ![image-1](https://github.com/user-attachments/assets/84bb3d9c-92aa-4a90-88d9-6b7889299f22)
-##### 优化2:
+
+#### 优化2:
 原本的guide-rpc中使用了UUID作为请求体ID，由于UUID其**空间消耗大(128bit)、不安全(基于MAC生成、非递增)**等缺点，本项目增加了改良版Seata-Snowflake算法，用于生成分布式全局唯一的请求ID，可通过SPI的方式来灵活配置。
 
 该算法代码路径如下：
@@ -135,7 +139,7 @@ invokeBeanFactoryPostProcessors(beanFactory);
 
 由于Seata-Snowflake在生成ID的过程不依赖时间，因此不存在时间回拨问题，同时也不存在生成不稳定问题，很好的解决了上述两个问题。
 
-##### 优化3:
+#### 优化3:
 当客户端rpc服务调用rpc服务时，由于网络或一些原因导致该rpc服务不可用，为了应对这种情况，本项目在客户端提供了**单个服务级别**的容错服务，支持**failover（故障转移）、failfast（快速失败）策略**。可在@RpcReference引用中配置，如下：
 
 ![image-4](https://github.com/user-attachments/assets/5acbbe5b-5dcc-478e-9abb-177b27c8808b)
@@ -143,7 +147,7 @@ invokeBeanFactoryPostProcessors(beanFactory);
 当然，也可以通过实现如下TolerantStrategy接口的doTolerant方法自定义你想要的容错逻辑。
 ![image-3](https://github.com/user-attachments/assets/1a14c09c-dfed-46c8-8470-13bf26d7b6a2)
 
-##### 优化4:
+#### 优化4:
 整合sisyphus-Retryer框架，支持多种超时重试策略（如固定间隔、指数增加间隔等），可在@RpcReference引用中配置，如下：
 ![image-6](https://github.com/user-attachments/assets/c11d88da-fa23-4878-9c27-497f7c1341f5)
 
@@ -161,7 +165,7 @@ guava支持通过数据对象来控制重试逻辑，但是它不支持注解的
 
 sisphus则是对guava-Retry的封装，提供了注解的方式，具体配置、使用内容见[sisyphus官网](https://github.com/houbb/sisyphus)
 
-##### 优化5:
+#### 优化5:
 场景1：当客户端频繁重复调用一个rpc服务时，需要重复的通过网络请求向注册中心获取服务提供者的地址，开销很大
 
 场景2：当客户端频繁重复调用一个rpc服务时，注册中心不可用，但实际的服务提供者是可用的
