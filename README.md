@@ -29,7 +29,7 @@
 ### 接下来逐步介绍上述优化的代码以及原因
 
 #### 优化1:
- ***1.1*** 由于mini-spring不支持扫描指定注解到IOC，为了支持这个功能，本项目修改了package org.springframework.context.annotation包下的
+ ***1.1*** 由于mini-spring不支持扫描指定注解到IOC，为了支持这个功能，本项目修改了package org.springframework.context.annotation包下的ClassPathScanningCandidateComponentProvider类
  ``` 
 	public Set<BeanDefinition> findCandidateComponents(String basePackage,Class T) {
 		Set<BeanDefinition> candidates = new LinkedHashSet<BeanDefinition>();
