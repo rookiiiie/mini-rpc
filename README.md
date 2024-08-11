@@ -118,6 +118,7 @@ invokeBeanFactoryPostProcessors(beanFactory);
 原本的guide-rpc中使用了UUID作为请求体ID，由于UUID其**空间消耗大(128bit)、不安全(基于MAC生成、非递增)**等缺点，本项目增加了改良版Seata-Snowflake算法，用于生成分布式全局唯一的请求ID，可通过SPI的方式来灵活配置。
 
 该算法代码路径如下：
+
 ![image-2](https://github.com/user-attachments/assets/384d6e34-6d5f-44e0-bb36-40e7a486ae33)
 
  ###### 原版Snowflake的结构如下：
@@ -145,10 +146,12 @@ invokeBeanFactoryPostProcessors(beanFactory);
 ![image-4](https://github.com/user-attachments/assets/5acbbe5b-5dcc-478e-9abb-177b27c8808b)
 
 当然，也可以通过实现如下TolerantStrategy接口的doTolerant方法自定义你想要的容错逻辑。
+
 ![image-3](https://github.com/user-attachments/assets/1a14c09c-dfed-46c8-8470-13bf26d7b6a2)
 
 #### 优化4:
 整合sisyphus-Retryer框架，支持多种超时重试策略（如固定间隔、指数增加间隔等），可在@RpcReference引用中配置，如下：
+
 ![image-6](https://github.com/user-attachments/assets/c11d88da-fa23-4878-9c27-497f7c1341f5)
 
 当然，你也可以像固定间隔时间一样，通过继承com.github.houbb.sisyphus.core.support.wait.AbstractRetryWait或实现RetryWait接口来灵活定义自己想要的重试策略~
