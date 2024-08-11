@@ -164,7 +164,7 @@ spring-Retry只支持通过**捕捉Throwable的子类**来控制重试逻辑（�
 
 ###### 不使用guava-Retry的原因
 
-guava支持通过数据对象来控制重试逻辑，但是它不支持注解的方式
+guava支持通过数据对象来控制重试逻辑，但是它**不支持注解**的配置方式
 
 sisphus则是对guava-Retry的封装，提供了注解的方式，具体配置、使用内容见[sisyphus官网](https://github.com/houbb/sisyphus)
 
