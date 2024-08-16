@@ -115,7 +115,7 @@ invokeBeanFactoryPostProcessors(beanFactory);
 ![image-1](https://github.com/user-attachments/assets/84bb3d9c-92aa-4a90-88d9-6b7889299f22)
 
 #### 优化2:
-原本的guide-rpc中使用了UUID作为请求体ID，由于UUID其**空间消耗大(128bit)、不安全(基于MAC生成、非递增)** 等缺点，本项目增加了改良版Seata-Snowflake算法，用于生成分布式全局唯一的请求ID，可通过SPI的方式来灵活配置。
+原本的guide-rpc中使用了UUID作为请求体ID，由于UUID其**空间消耗大(128bit)、不安全(基于MAC生成)、非递增** 等缺点，本项目增加了改良版Seata-Snowflake算法，用于生成分布式全局唯一的请求ID，可通过SPI的方式来灵活配置。
 
 该算法代码路径如下：
 
