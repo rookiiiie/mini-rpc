@@ -106,6 +106,9 @@ invokeBeanFactoryPostProcessors(beanFactory);
 		}
 	}
 ```
+
+考虑到次序：服务注册->服务发现，因此在先后的2个扩展点分别执行服务注册与服务发现，如下：
+
 本项目的第一个扩展点执行@RpcService服务的注册，位于如下路径
 
 ![image](https://github.com/user-attachments/assets/e2255fe6-6167-4e1e-a127-8946af86dbcc)
